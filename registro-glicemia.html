@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiaCare - Registro de Glicemia</title>
+  <link rel="stylesheet" href="testa.css">
+  <!-- Inclua a biblioteca Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <h1>DiaCare</h1>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2>Registrar Glicemia Capilar</h2>
+    <p>Por favor, insira o valor da sua glicemia para registro.</p>
+
+    <!-- Formulário de registro -->
+    <form id="form-glicemia">
+      <label for="data">Data:</label>
+      <input type="date" id="data" name="data" required><br>
+
+      <label for="glicemia">Valor da Glicemia (mg/dL):</label>
+      <input type="number" id="glicemia" name="glicemia" required placeholder="Exemplo: 120"><br>
+
+       <div class="form-group"><br>
+        <label for="Período">Período :</label>
+        <select id="Período" name="Período" required>
+          <option value="Selecione">Selecione</option>
+		  <option value="Jejum">Jejum</option>
+          <option value="Pré-prandial">Pré-prandial</option>
+		  <option value="Pós-prandial">Pós-prandial</option>
+        </select>
+       </div>
+
+      <button type="submit" class="form-button">Registrar</button>
+    </form>
+
+    <!-- Container do gráfico dinâmico -->
+    <div class="grafico-container">
+      <h3>Histórico de Glicemia</h3>
+      <canvas id="graficoGlicemia"></canvas>
+    </div>
+  </main>
+
+  <button class="botao-voltar" onclick="window.history.back()">Voltar</button>
+
+  <footer class="footer">
+    <p>&copy; 2024 DiaCare. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Dados iniciais do gráfico
+    const dadosGlicemia = {
+      labels: [], // Datas serão adicionadas aqui
+      datasets: [{
+        label: 'Glicemia (mg/dL)',
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        data: [] // Valores de glicemia serão adicionados aqui
+      }]
+    };
+
+    // Configuração do gráfico
+    const config = {
+      type: 'bar',
+      data: dadosGlicemia,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // Inicializa o gráfico
+    const ctx = document.getElementById('graficoGlicemia').getContext('2d');
+    const graficoGlicemia = new Chart(ctx, config);
+
+    // Captura o evento de envio do formulário
+    document.getElementById('form-glicemia').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evita o envio do formulário
+
+      // Captura os valores do formulário
+      const data = document.getElementById('data').value;
+      const valorGlicemia = parseFloat(document.getElementById('glicemia').value);
+
+      // Valida se todos os campos foram preenchidos
+      if (data && !isNaN(valorGlicemia)) {
+        // Adiciona os dados ao gráfico
+        dadosGlicemia.labels.push(data); // Adiciona a data
+        dadosGlicemia.datasets[0].data.push(valorGlicemia); // Adiciona o valor da glicemia
+
+        // Atualiza o gráfico
+        graficoGlicemia.update();
+
+        // Limpa o formulário após o envio
+        document.getElementById('form-glicemia').reset();
+      } else {
+        console.error('Erro: Dados inválidos.');
+      }
+    });
+  </script>
+</body>
+</html>
