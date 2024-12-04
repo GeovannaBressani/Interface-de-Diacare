@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Anamnese</title>
+  <link rel="stylesheet" href="testa.css">
+</head>
+<body>
+  <!-- Cabeçalho com a logo -->
+  <header class="header">
+    <div class="logo-container">
+      <h1>DiaCare</h1>
+      <div class="heart"></div>
+    </div>
+  </header>
+
+  <!-- Formulário de Anamnese -->
+  <main class="content">
+    <h2>Registro de Anamnese</h2>
+    <form>
+      <label for="data">Data:</label>
+      <input type="date" id="data" name="data" required><br>
+
+      <div class="form-group">
+        <label for="tipo-diabetes">Tipo de Diabetes:</label>
+        <select id="tipo-diabetes" name="tipo-diabetes" required>
+          <option value="Selecione">Selecione</option>
+		  <option value="Tipo 1">Tipo 1</option>
+          <option value="Tipo 2">Tipo 2</option>
+          <option value="Gestacional">Gestacional</option>
+        </select>
+      </div><br>
+      <div class="form-group">
+        <label for="insulina">Usa insulina?</label>
+        <select id="insulina" name="insulina" required>
+		 <option value="Selecione">Selecione</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div><br>
+
+
+
+
+     <div class="form-group">
+        <label for="doenca">Outras doenças</label>
+        <select id="doenca" name="doenca" required>
+		 <option value="Selecione">Selecione</option>
+          <option value="Hipertensão arterial">Hipertensão arterial</option>
+          <option value="Dislipidemia">Dislipidemia</option>
+		  <option value="Câncer">Câncer</option>
+		  <option value="Depressão">Depressão</option>
+		    <label for="doenca">Outras doenças:</label>
+        <textarea id="doenca" name="doenca" placeholder="Outras doenças"></textarea>
+        </select>
+      </div>
+
+	  
+	  <div class="form-group">
+        <label for="alergias">Alergias:</label>
+        <textarea id="alergias" name="alergias" placeholder="Descreva se aplicável"></textarea>
+      </div>
+
+      <label for="medicacoes">Medicações Atuais:</label>
+      <textarea id="medicacoes" name="medicacoes" rows="4" required></textarea><br>
+
+      <label for="historico">Histórico Familiar:</label>
+      <textarea id="historico" name="historico" rows="4"></textarea><br>
+	  
+	   <div class="form-group">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" placeholder="Digite seu peso" required>
+      </div><br>
+	   <div class="form-group">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" name="altura" placeholder="Digite sua altura" required>
+      </div>
+      
+      <button type="submit" class="botao">Salvar</button>
+    </form>
+  </main>
+
+  <!-- Botão Voltar -->
+  <button onclick="window.history.back()" class="botao-voltar">Voltar</button>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2024 DiaCare. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
