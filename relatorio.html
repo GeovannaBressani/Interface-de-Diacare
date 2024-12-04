@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiaCare - Relatório de Exames e IMC</title>
+  <link rel="stylesheet" href="testa.css">
+  <script>
+    // Função para preencher a tabela de exames com dados dinâmicos
+    function preencherTabela() {
+      const tabelaExames = document.getElementById('tabela-exames');
+      
+      // Os dados dos exames serão preenchidos dinamicamente aqui.
+      // Exemplo de como os dados seriam adicionados (adicione suas fontes de dados):
+      const dadosExame = []; // Coloque aqui seus dados de exames puxados de uma fonte externa (API, banco de dados, etc.)
+
+      dadosExame.forEach((exame, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><span id="data-resultado-${index}">${exame.data}</span></td>
+          <td><span id="tipo-exame-${index}">${exame.tipo}</span></td>
+          <td><span id="resultado-${index}">${exame.resultado}</span></td>
+        `;
+        tabelaExames.appendChild(row);
+      });
+    }
+
+    // Função para preencher os dados de altura e peso
+    function preencherAlturaPeso() {
+      // Os dados de altura e peso também serão preenchidos dinamicamente
+      const alturaPeso = { altura: "---", peso: "---" }; // Adicione os dados de altura e peso aqui.
+      document.getElementById('altura').textContent = alturaPeso.altura;
+      document.getElementById('peso').textContent = alturaPeso.peso;
+    }
+
+    // Função para preencher o gráfico de IMC
+    function preencherGraficoIMC() {
+      // Aqui você pode puxar o gráfico de IMC de uma fonte externa
+      const graficoElement = document.getElementById('grafico-imc');
+      graficoElement.innerHTML = `
+        <p>IMC Atual: ---</p>
+        <div class="grafico">
+          <!-- O gráfico será gerado dinamicamente com base nos dados -->
+        </div>
+      `;
+    }
+
+    // Função que é chamada quando o conteúdo é carregado
+    window.onload = function() {
+      preencherTabela();
+      preencherAlturaPeso();
+      preencherGraficoIMC();
+    };
+  </script>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="logo-container">
+      <h1>DiaCare</h1>
+      <div class="heart"></div>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <h2>Relatório de Exames e IMC</h2>
+    <p>Veja seu histórico de exames e acompanhe seu IMC.</p>
+
+    <!-- Filtros para mês e ano -->
+    <form class="form" method="GET">
+      <label for="mes">Mês:</label>
+      <select id="mes" name="mes" required>
+        <option value="01">Janeiro</option>
+        <option value="02">Fevereiro</option>
+        <option value="03">Março</option>
+        <option value="04">Abril</option>
+        <option value="05">Maio</option>
+        <option value="06">Junho</option>
+        <option value="07">Julho</option>
+        <option value="08">Agosto</option>
+        <option value="09">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+      </select>
+
+      <label for="ano">Ano:</label>
+      <input type="number" id="ano" name="ano" min="1900" max="2024" required>
+
+      <button type="submit" class="form-button">Filtrar</button>
+    </form>
+
+    <!-- Tabela de Relatórios -->
+    <h3>Exames Realizados</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Tipo de Exame</th>
+          <th>Resultado</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-exames">
+        <!-- As linhas de exames serão preenchidas dinamicamente aqui -->
+      </tbody>
+    </table>
+
+    <!-- Informações de Altura e Peso -->
+    <h3>Informações Antropométricas</h3>
+    <p><strong>Altura:</strong> <span id="altura">---</span></p>
+    <p><strong>Peso:</strong> <span id="peso">---</span></p>
+
+    <!-- Gráfico de IMC -->
+    <h3>Gráfico de IMC</h3>
+    <div id="grafico-imc">
+      <!-- O gráfico será preenchido dinamicamente aqui -->
+    </div>
+  </main>
+
+  <button class="botao-voltar" onclick="window.history.back()">Voltar</button>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2024 DiaCare. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
