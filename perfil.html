@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil do Usuário</title>
+  <link rel="stylesheet" href="testa.css">
+  <style>
+    /* Estilo para centralizar e criar o retângulo */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Adicionar espaçamento entre os campos */
+    label {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007BFF;
+      color: #fff;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="logo-container">
+      <h1>DiaCare</h1>
+      <div class="heart"></div>
+    </div>
+    <div class="profile-container">
+      <i class="fas fa-user-circle"></i>
+    </div>
+  </header>
+
+  <!-- Retângulo centralizado -->
+  <div class="container">
+    <main class="content">
+      <h2>Perfil do Usuário</h2>
+
+      <!-- Modo de visualização -->
+      <div id="profile-view">
+        <p><strong>Nome:</strong> <span id="nome">---</span></p>
+        <p><strong>Email:</strong> <span id="email">---</span></p>
+        <p><strong>Senha:</strong> <span id="senha">---</span></p>
+        <p><strong>Altura:</strong> <span id="altura">---</span></p>
+        <p><strong>Peso:</strong> <span id="peso">---</span></p>
+        <p><strong>Tipo de Diabetes:</strong> <span id="tipo-diabetes">---</span></p>
+        <p><strong>Usa Insulina:</strong> <span id="insulina">---</span></p>
+        <p><strong>Outras Doenças:</strong> <span id="doenca">---</span></p>
+        <p><strong>Alergias:</strong> <span id="alergias">---</span></p>
+        <p><strong>Medicação Atual:</strong> <span id="medicacoes">---</span></p>
+        
+        <button onclick="enableEdit()">Atualizar</button>
+      </div>
+
+      <!-- Modo de edição -->
+      <div id="profile-edit" style="display: none;">
+        <form id="profile-form">
+          <!-- Nome -->
+          <label for="name-input">Nome: 
+            <input type="text" id="name-input" placeholder="Digite seu nome">
+          </label>
+          <!-- Email -->
+          <label for="email-input">Email: 
+            <input type="email" id="email-input" placeholder="Digite seu email">
+          </label>
+          <!-- Senha -->
+          <label for="password-input">Senha: 
+            <input type="password" id="password-input" placeholder="Digite sua senha">
+          </label>
+          <!-- Altura -->
+          <label for="height-input">Altura: 
+            <input type="number" id="height-input" placeholder="Altura (cm)" min="50" max="250">
+          </label>
+          <!-- Peso -->
+          <label for="weight-input">Peso: 
+            <input type="number" id="weight-input" placeholder="Peso (kg)" min="20" max="300">
+          </label>
+          <!-- Tipo de Diabetes -->
+          <label for="diabetes-type-input">Tipo de Diabetes: 
+            <input type="text" id="diabetes-type-input" placeholder="Tipo de diabetes">
+          </label>
+          <!-- Usa Insulina -->
+          <label for="insulin-input">Usa Insulina: 
+            <input type="text" id="insulin-input" placeholder="Sim ou Não">
+          </label>
+          <!-- Outras Doenças -->
+          <label for="other-diseases-input">Outras Doenças: 
+            <input type="text" id="other-diseases-input" placeholder="Digite outras doenças">
+          </label>
+          <!-- Alergias -->
+          <label for="allergies-input">Alergias: 
+            <input type="text" id="allergies-input" placeholder="Digite alergias">
+          </label>
+          <!-- Medicação Atual -->
+          <label for="medication-input">Medicação Atual: 
+            <input type="text" id="medication-input" placeholder="Digite a medicação atual">
+          </label>
+
+          <!-- Botões de ação -->
+          <button type="button" onclick="saveChanges()">Salvar</button>
+          <button type="button" onclick="cancelEdit()">Cancelar</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Botão Voltar -->
+  <button class="botao-voltar" onclick="window.history.back()">Voltar</button>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <p>&copy; 2024 DiaCare. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Função para habilitar a edição
+    function enableEdit() {
+      document.getElementById('profile-view').style.display = 'none';
+      document.getElementById('profile-edit').style.display = 'block';
+    }
+
+    // Função para salvar as alterações
+    function saveChanges() {
+      const name = document.getElementById('name-input').value || '---';
+      const email = document.getElementById('email-input').value || '---';
+      const password = document.getElementById('password-input').value || '---';
+      const height = document.getElementById('height-input').value;
+      const weight = document.getElementById('weight-input').value;
+      const diabetesType = document.getElementById('diabetes-type-input').value || '---';
+      const insulin = document.getElementById('insulin-input').value || '---';
+      const otherDiseases = document.getElementById('other-diseases-input').value || '---';
+      const allergies = document.getElementById('allergies-input').value || '---';
+      const medication = document.getElementById('medication-input').value || '---';
+
+      // Atualizando os valores no modo de visualização
+      document.getElementById('name-view').innerText = name;
+      document.getElementById('email-view').innerText = email;
+      document.getElementById('password-view').innerText = password;
+      document.getElementById('height-view').innerText = height ? `${height} cm` : '---';
+      document.getElementById('weight-view').innerText = weight ? `${weight} kg` : '---';
+      document.getElementById('diabetes-type-view').innerText = diabetesType;
+      document.getElementById('insulin-view').innerText = insulin;
+      document.getElementById('other-diseases-view').innerText = otherDiseases;
+      document.getElementById('allergies-view').innerText = allergies;
+      document.getElementById('medication-view').innerText = medication;
+
+      // Voltar para o modo de visualização
+      cancelEdit();
+    }
+
+    // Função para cancelar a edição
+    function cancelEdit() {
+      document.getElementById('profile-view').style.display = 'block';
+      document.getElementById('profile-edit').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
