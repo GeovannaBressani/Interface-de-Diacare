@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiaCare - Registro de Exames</title>
+  <link rel="stylesheet" href="testa.css"> <!-- Certifique-se de que este arquivo existe -->
+  <style>
+    #mensagem-confirmacao {
+      display: none;
+      color: green;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <h1>DiaCare</h1>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2>Registro de Exames</h2>
+    <form id="form-exames">
+        <label for="data-exame">Data da realização do Exame:</label>
+      <input type="date" id="data-exame" name="data-exame" required>
+	  
+      <label for="data-resultado">Data do resultado do Exame:</label>
+      <input type="date" id="data-resultado" name="data-resultado" required>
+	  
+      <label for="tipo-exame">Tipo de Exame:</label>
+      <input type="text" id="tipo-exame" name="tipo-exame" required placeholder="Ex: Hemoglobina Glicada">
+
+      <label for="resultado">Resultado:</label>
+      <textarea id="resultado" name="resultado" required placeholder="Descreva os resultados do exame"></textarea>
+
+
+
+      <button type="submit" class="form-button">Registrar Exame</button>
+    </form>
+
+    <p id="mensagem-confirmacao">✅ Exame registrado com sucesso!</p>
+  </main>
+
+  <button class="botao-voltar" onclick="window.history.back()">Voltar</button>
+
+  <footer class="footer">
+    <p>&copy; 2024 DiaCare. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    document.getElementById('form-exames').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      
+      // Exibir mensagem com efeito de fade-in
+      const mensagem = document.getElementById('mensagem-confirmacao');
+      mensagem.style.display = 'block'; 
+      setTimeout(() => { mensagem.style.opacity = 1; }, 100);
+      
+      this.reset(); // Limpa o formulário
+    });
+  </script>
+</body>
+</html>
